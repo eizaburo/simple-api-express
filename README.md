@@ -66,7 +66,14 @@ clone後、npm isntall, node contact.jsの順で実行
 git clone https://
 cd simple-api-express
 npm install
+```
+
+その後、API実行。
+
+```
 node contact.js
+
+API Server start.
 ```
 
 # Requirements
