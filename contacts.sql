@@ -1,0 +1,7 @@
+CREATE TABLE contacts (
+	id SERIAL PRIMARY KEY,
+	title VARCHAR(256),
+	email VARCHAR(64),
+	message TEXT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
