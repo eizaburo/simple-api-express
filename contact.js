@@ -23,15 +23,25 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//バリデーション用の正規表現定義
+const regex_title = /^.{1,10}$/;
+const regex_email = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const regex_message = /^.{1,10}$/;
+
 //とりあえずテスト表示
 app.get("/", (req, res) => {
-    res.send("Hello Node.js API.");
+    return res.send("Hello Node.js API.");
 });
 
 //値をPOST（x-form-urlencodedで）受け取ってInsertし、レスポンスをテキストで返す
 app.post("/text/contacts", async (req, res) => {
     //POSTされた値を取得
     const { title, email, message } = req.body;
+
+    //バリデーション
+    if (!regex_title.test(title)) return res.json("エラー：お問合せタイトルの値が不正です。");
+    if (!regex_email.test(email)) return res.json("エラー：Emailの値が不正です。");
+    if (!regex_message.test(message)) return res.json("エラー：お問合せ内容の値が不正です。");
 
     try {
 
@@ -42,10 +52,10 @@ app.post("/text/contacts", async (req, res) => {
         });
 
         //レスポンスを返す
-        res.send("受け付けました（from node.js - text）");
+        return res.send("受け付けました（from node.js - text）");
 
     } catch (error) {
-        res.status(500).send(`エラー：${error.toString()}`);
+        return res.status(500).send(`エラー：${error.toString()}`);
     }
 
 });
@@ -54,6 +64,12 @@ app.post("/text/contacts", async (req, res) => {
 app.post("/json/contacts", async (req, res) => {
     //POSTされた値を取得
     const { title, email, message } = req.body;
+
+    //バリデーション
+    if (!regex_title.test(title)) return res.json({ message: "エラー：お問合せタイトルの値が不正です。", contacts: {} });
+    if (!regex_email.test(email)) return res.json({ message: "エラー：Emailの値が不正です。", contacts: {} });
+    if (!regex_message.test(message)) return res.json({ message: "エラー：お問合せ内容の値が不正です。", contacts: {} });
+
     try {
         //取得した値をDBに挿入
         const result = await pool.query({
@@ -62,12 +78,12 @@ app.post("/json/contacts", async (req, res) => {
         });
 
         // 挿入されたレコードをJSONで返す
-        res.json({
+        return res.json({
             message: "受け付けました（from node.js - json）",
             contact: result.rows[0]
         });
     } catch (error) {
-        res.status(500).json({ error: error.toString() });
+        return res.status(500).json({ error: error.toString() });
     }
 
 });
