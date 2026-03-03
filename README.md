@@ -85,6 +85,8 @@ API Server start.
 ## 技術系
 
 - （Web）APIとは何かを理解し、説明してみる
+- portとは何かを理解し、説明してみる
+- npm installは何をしているのか？
 
 ## PM系
 
