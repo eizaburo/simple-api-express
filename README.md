@@ -1,4 +1,4 @@
-# Simple API Express
+# simple-api-express
 
 学習用のシンプルなAPI実装（node.js + Express利用版）
 [Simple Basic Web](https://github.com/eizaburo/simple-basic-web)のextension/api-expressブランチとの連携を想定した仕様になっています。
@@ -84,13 +84,13 @@ API Server start.
 
 ## 技術系
 
-- （Web）APIとは何かを理解し、説明してみる
-- portとは何かを理解し、説明してみる
-- npm installは何をしているのか？
+- （Web）APIとは何かを理解し、説明できるようになる
+- portとは何かを理解し、説明できるようになる
+- CORSとは何かを理解し、説明できるようになる
 
 ## PM系
 
-- APIの仕様書を作成してみる
+- APIの設計書・仕様書を作成してみる
 - 他の技術でAPIを実装、デプロイしてみる
 
 ## テスト系（技術・PM共通）
